@@ -21,8 +21,8 @@ cd /
 
 cp /usr/share/applications/firefox.desktop .
 sed -i -e "s|Exec=.*|Exec=firefox|g" firefox.desktop
-sed -i -e "s|Icon=.*|Icon=firefox.png|g" firefox.desktop
-cp /usr/share/pixmaps/firefox.png .
+sed -i -e "s|Icon=.*|Icon=mozicon128.png|g" firefox.desktop
+cp /usr/lib/firefox/browser/icons/mozicon128.png .
 get_desktopintegration firefox
 
 
@@ -31,7 +31,7 @@ mkdir -p /$APPDIR/$APP.AppDir
 cd  /$APPDIR/$APP.AppDir
 get_apprun
 mkdir -p ./usr/share; mv /usr/share/apport $_
-mkdir -p ./usr/share/pixmaps; mv /usr/share/pixmaps/firefox.png $_
+mkdir -p ./usr/share/icons; cp /usr/lib/firefox/browser/icons/mozicon128.png $_
 mv /usr/share/applications ./usr/share
 mv /usr/share/mime ./usr/share
 
@@ -48,7 +48,6 @@ mkdir -p ./etc mv /etc/apport $_
 mv /etc/firefox ./etc/
 mv /etc/apparmor.d ./etc/
 
-ls -l ./usr/share/pixmaps
 # We don't bundle the developer stuff
 rm -rf usr/include || true
 rm -rf usr/lib/cmake || true
