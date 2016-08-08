@@ -5,7 +5,7 @@ export DEBIAN_FRONTEND=noninteractive
 
 # Install what we can via packages
 sudo apt-get update && sudo apt-get -y upgrade
-sudo apt-get -y install software-properties-common shared-mime-info
+sudo apt-get -y install software-properties-common shared-mime-info python-xdg
 sudo add-apt-repository ppa:plasmazilla/releases
  sudo apt-get update
  sudo apt-get -y install firefox-plasma thunderbird-plasma
@@ -31,7 +31,7 @@ mkdir -p /$APPDIR/$APP.AppDir
 cd  /$APPDIR/$APP.AppDir
 get_apprun
 mkdir -p ./usr/share; mv /usr/share/apport $_
-mkdir -p ./usr/share/icons/hicolor/48x48/apps; mv /usr/share/pixmaps/firefox.png $_
+mkdir -p ./usr/share/pixmaps; mv /usr/share/pixmaps/firefox.png $_
 mv /usr/share/applications ./usr/share
 mv /usr/share/mime ./usr/share
 
@@ -53,7 +53,6 @@ mv /etc/apparmor.d ./etc/
 rm -rf usr/include || true
 rm -rf usr/lib/cmake || true
 rm -rf usr/lib/pkgconfig || true
-rm -rf ./usr/share/doc/vlc/libvlc/ || true
 find /$APPDIR/$APP.AppDir/usr/lib/ -name '*.la' | xargs -i rm {}
 
 ########################################################################
@@ -61,5 +60,6 @@ find /$APPDIR/$APP.AppDir/usr/lib/ -name '*.la' | xargs -i rm {}
 # Now packaging it as an AppImage
 ########################################################################
 cd /$APPDIR
+ls -l ./usr/share/pixmaps
 rm /out/* || true
 generate_appimage
