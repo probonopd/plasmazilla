@@ -59,6 +59,5 @@ find /$APPDIR/$APP.AppDir/usr/lib/ -name '*.la' | xargs -i rm {}
 # Now packaging it as an AppImage
 ########################################################################
 cd /$APPDIR
-rm $APP.AppDir/.DirIcon
 rm /out/* || true
 generate_appimage
