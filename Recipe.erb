@@ -1,0 +1,63 @@
+ARCH=$(arch)
+APP=<%= name %>
+VERSION=0.6.4~git20150428+14
+export DEBIAN_FRONTEND=noninteractive
+
+# Install what we can via packages
+sudo apt-get update && sudo apt-get -y upgrade
+sudo apt-get -y install software-properties-common shared-mime-info
+sudo add-apt-repository ppa:plasmazilla/releases
+ sudo apt-get update
+ sudo apt-get install firefox-plasma thunderbird-plasma
+ 
+########################################################################
+# Build complete
+# Now creating the AppDir
+########################################################################
+wget -q https://github.com/probonopd/AppImages/raw/master/functions.sh -O ./functions.sh
+. ./functions.sh
+
+cd /
+
+cp /usr/share/applications/firefox.desktop .
+cp /usr/share/pixmaps/firefox.png .
+get_desktopintegration firefox-plasma
+
+
+APPDIR=firefox
+mkdir -p /$APPDIR/$APP.AppDir
+cd  /$APPDIR/$APP.AppDir
+get_apprun
+mkdir -p ./usr/share; mv /usr/share/apport $_
+mv /usr/share/pixmaps ./usr/share
+mv /usr/share/applications ./usr/share
+mv /usr/share/mime ./usr/share
+
+export LD_LIBRARY_PATH=./usr/lib/:$LD_LIBRARY_PATH
+
+patch_usr
+move_lib
+copy_deps # Three runs to ensure we catch indirect ones
+delete_blacklisted
+mkdir -p ./usr/bin; mv /usr/bin/firefox $_
+mkdir -p ./usr/lib; mv /usr/lib/firefox $_
+mv /usr/lib/firefox-addons ./usr/lib/
+mkdir -p ./etc mv /etc/apport $_
+mv /etc/firefox ./etc/
+mv /etc/apparmor.d ./etc/
+
+
+# We don't bundle the developer stuff
+rm -rf usr/include || true
+rm -rf usr/lib/cmake || true
+rm -rf usr/lib/pkgconfig || true
+rm -rf ./usr/share/doc/vlc/libvlc/ || true
+find /$APPDIR/$APP.AppDir/usr/lib/ -name '*.la' | xargs -i rm {}
+
+########################################################################
+# AppDir complete
+# Now packaging it as an AppImage
+########################################################################
+cd /$APPDIR
+rm /out/* || true
+generate_appimage
