@@ -42,7 +42,6 @@ move_lib
 copy_deps # Three runs to ensure we catch indirect ones
 delete_blacklisted
 mv /usr/bin/firefox ./usr/bin/
-mv /usr/bin/kdialog ./usr/bin/
 mkdir -p ./usr/lib; mv /usr/lib/firefox $_
 mv /usr/lib/firefox-addons ./usr/lib/
 mkdir -p ./etc; mv /etc/apport $_
