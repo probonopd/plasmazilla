@@ -21,8 +21,9 @@ cd /
 
 cp /usr/share/applications/firefox.desktop .
 sed -i -e "s|Exec=.*|Exec=firefox|g" firefox.desktop
-sed -i -e "s|Icon=.*|Icon=firefox.png|g" firefox.desktop
+sed -i -e "s|Icon=.*|Icon=firefox|g" firefox.desktop
 cp /usr/share/pixmaps/firefox.png .
+ls -l
 cat firefox.desktop
 get_desktopintegration firefox
 
