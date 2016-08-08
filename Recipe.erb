@@ -48,7 +48,7 @@ mkdir -p ./etc mv /etc/apport $_
 mv /etc/firefox ./etc/
 mv /etc/apparmor.d ./etc/
 
-
+ls -l ./usr/share/pixmaps
 # We don't bundle the developer stuff
 rm -rf usr/include || true
 rm -rf usr/lib/cmake || true
@@ -60,6 +60,5 @@ find /$APPDIR/$APP.AppDir/usr/lib/ -name '*.la' | xargs -i rm {}
 # Now packaging it as an AppImage
 ########################################################################
 cd /$APPDIR
-ls -l ./usr/share/pixmaps
 rm /out/* || true
 generate_appimage
