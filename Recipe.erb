@@ -21,7 +21,7 @@ cd /
 
 cp /usr/share/applications/firefox.desktop .
 sed -i -e "s|Exec=.*|Exec=firefox|g" firefox.desktop
-sed -i -e "s|Icon=.*|Icon=/usr/share/pixmaps/firefox.png|g" firefox.desktop
+sed -i -e "s|Icon=.*|Icon=firefox.png|g" firefox.desktop
 cp /usr/share/pixmaps/firefox.png .
 get_desktopintegration firefox
 
@@ -31,7 +31,7 @@ mkdir -p /$APPDIR/$APP.AppDir
 cd  /$APPDIR/$APP.AppDir
 get_apprun
 mkdir -p ./usr/share; mv /usr/share/apport $_
-mkdir ./usr/share/pixmaps; mv /usr/share/pixmaps/firefox.png $_
+mkdir ./usr/share/icons/hicolor/48x48/apps; mv /usr/share/pixmaps/firefox.png $_
 mv /usr/share/applications ./usr/share
 mv /usr/share/mime ./usr/share
 
