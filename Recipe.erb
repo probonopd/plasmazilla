@@ -32,7 +32,8 @@ get_apprun
 mkdir -p ./usr/share; mv /usr/share/apport $_
 mv /usr/share/applications ./usr/share
 mv /usr/share/mime ./usr/share
-mkdir /usr/share/pixmaps; /usr/lib/firefox/browser/icons/mozicon128.png /usr/share/pixmaps/firefox.png
+rm /usr/share/pixmaps/firefox.png
+cp /usr/lib/firefox/browser/icons/mozicon128.png /usr/share/pixmaps/firefox.png
 
 export LD_LIBRARY_PATH=./usr/lib/:$LD_LIBRARY_PATH
 
