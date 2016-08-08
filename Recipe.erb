@@ -8,7 +8,7 @@ sudo apt-get update && sudo apt-get -y upgrade
 sudo apt-get -y install software-properties-common shared-mime-info python-xdg
 sudo add-apt-repository ppa:plasmazilla/releases
  sudo apt-get update
- sudo apt-get -y install firefox-plasma thunderbird-plasma kde-baseapps-bin
+ sudo apt-get -y install firefox-plasma thunderbird-plasma
 
 ########################################################################
 # Build complete
@@ -45,7 +45,7 @@ mv /usr/bin/firefox ./usr/bin/
 mv /usr/bin/kdialog ./usr/bin/
 mkdir -p ./usr/lib; mv /usr/lib/firefox $_
 mv /usr/lib/firefox-addons ./usr/lib/
-mkdir -p ./etc mv /etc/apport $_
+mkdir -p ./etc; mv /etc/apport $_
 mv /etc/firefox ./etc/
 mv /etc/apparmor.d ./etc/
 
