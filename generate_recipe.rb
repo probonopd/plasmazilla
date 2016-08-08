@@ -46,7 +46,7 @@ class Recipe
 end
 
 appimage = Recipe.new
-appimage.name = "plasmazilla"
+appimage.name = "firefox"
 appimage.proper_name = appimage.name.capitalize
 appimage.apps = [Recipe::App.new("#{appimage.name}")]
 File.write('Recipe', appimage.render)
