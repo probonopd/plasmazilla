@@ -23,7 +23,7 @@ APPDIR=firefox
 mkdir -p /$APPDIR/$APP.AppDir
 cd  /$APPDIR/$APP.AppDir
 cp /usr/share/applications/firefox.desktop .
-sed -i -e "s|Exec=.*|Exec=firefox|g" firefox.desktop
+sed -i -e "s|Exec=.*|Exec=firefox.wrapper|g" firefox.desktop
 sed -i -e "s|Icon=.*|Icon=firefox.png|g" firefox.desktop
 cp /usr/lib/firefox/browser/icons/mozicon128.png firefox.png
 mkdir -p ./usr/bin
