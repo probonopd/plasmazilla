@@ -23,7 +23,6 @@ cp /usr/share/applications/firefox.desktop .
 sed -i -e "s|Exec=.*|Exec=firefox|g" firefox.desktop
 sed -i -e "s|Icon=.*|Icon=firefox.png|g" firefox.desktop
 cp /usr/lib/firefox/browser/icons/mozicon128.png firefox.png
-mkdir -p ./usr/bin
 get_desktopintegration firefox
 
 APPDIR=firefox
@@ -42,6 +41,7 @@ patch_usr
 move_lib
 copy_deps # Three runs to ensure we catch indirect ones
 delete_blacklisted
+mkdir -p ./usr/bin
 mv /usr/bin/firefox ./usr/bin/
 mkdir -p ./usr/lib; mv /usr/lib/firefox $_
 mv /usr/lib/firefox-addons ./usr/lib/
