@@ -19,16 +19,15 @@ wget -q https://github.com/probonopd/AppImages/raw/master/functions.sh -O ./func
 
 cd /
 get_apprun
+
+APPDIR=firefox
+mkdir -p /$APPDIR/$APP.AppDir
+cd  /$APPDIR/$APP.AppDir
 cp /usr/share/applications/firefox.desktop .
 sed -i -e "s|Exec=.*|Exec=firefox|g" firefox.desktop
 sed -i -e "s|Icon=.*|Icon=firefox.png|g" firefox.desktop
 cp /usr/lib/firefox/browser/icons/mozicon128.png firefox.png
 get_desktopintegration firefox
-
-APPDIR=firefox
-mkdir -p /$APPDIR/$APP.AppDir
-cd  /$APPDIR/$APP.AppDir
-cp /usr/lib/firefox/browser/icons/mozicon128.png firefox.png
 mkdir -p ./usr/share; mv /usr/share/apport $_
 mv /usr/share/applications ./usr/share
 mv /usr/share/mime ./usr/share
