@@ -27,9 +27,9 @@ get_desktopintegration firefox
 APPDIR=firefox
 mkdir -p /$APPDIR/$APP.AppDir
 cd  /$APPDIR/$APP.AppDir
-get_apprun
 mv /firefox.* .
 mv /default48.png .
+get_apprun
 mkdir -p ./usr/share; mv /usr/share/apport $_
 mv /usr/share/applications ./usr/share
 mv /usr/share/mime ./usr/share
@@ -43,7 +43,7 @@ move_lib
 copy_deps # Three runs to ensure we catch indirect ones
 delete_blacklisted
 mkdir -p ./usr/bin
-mv /usr/bin/firefox ./usr/bin/
+mv /usr/bin/firefox* ./usr/bin/
 mkdir -p ./usr/lib; mv /usr/lib/firefox $_
 mv /usr/lib/firefox-addons ./usr/lib/
 mkdir -p ./etc; mv /etc/apport $_
