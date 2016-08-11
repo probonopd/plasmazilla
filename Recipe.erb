@@ -14,6 +14,7 @@ mercurial unzip zip autoconf
 
 
 #Build Firefox
+wget -O bootstrap.py https://hg.mozilla.org/mozilla-central/raw-file/default/python/mozboot/bin/bootstrap.py && python bootstrap.py
 export SHELL=/bin/bash
 cd /usr/src
 hg clone https://hg.mozilla.org/mozilla-central
