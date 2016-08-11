@@ -19,20 +19,20 @@ wget -q https://github.com/probonopd/AppImages/raw/master/functions.sh -O ./func
 
 cd /
 get_apprun
+cp /usr/share/applications/firefox.desktop .
+sed -i -e "s|Exec=.*|Exec=firefox|g" firefox.desktop
+sed -i -e "s|Icon=.*|Icon=firefox.png|g" firefox.desktop
+cp /usr/lib/firefox/browser/chrome/icons/default/default48.png firefox.png
+get_desktopintegration firefox
 
 APPDIR=firefox
 mkdir -p /$APPDIR/$APP.AppDir
 cd  /$APPDIR/$APP.AppDir
-cp /usr/share/applications/firefox.desktop .
-sed -i -e "s|Exec=.*|Exec=firefox|g" firefox.desktop
-sed -i -e "s|Icon=.*|Icon=firefox.png|g" firefox.desktop
-cp /usr/lib/firefox/browser/icons/mozicon128.png firefox.png
-get_desktopintegration firefox
 mkdir -p ./usr/share; mv /usr/share/apport $_
 mv /usr/share/applications ./usr/share
 mv /usr/share/mime ./usr/share
-rm /usr/share/pixmaps/firefox.png
-cp /usr/lib/firefox/browser/icons/mozicon128.png /usr/share/pixmaps/firefox.png
+mkdir ./usr/share/icons/
+cp /usr/lib/firefox/browser/chrome/icons/default/default48.png ./usr/share/icons/firefox.png
 
 export LD_LIBRARY_PATH=./usr/lib/:$LD_LIBRARY_PATH
 
