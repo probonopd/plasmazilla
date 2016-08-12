@@ -19,6 +19,34 @@ export SHELL=/bin/bash
 cd /usr/src
 hg clone https://hg.mozilla.org/mozilla-central
 cd mozilla-central
+cat > mozconfig << EOF
+ac_add_options --enable-system-hunspell
+ac_add_options --enable-startup-notification
+ac_add_options --enable-system-sqlite
+ac_add_options --with-system-libevent
+ac_add_options --with-system-libvpx
+ac_add_options --with-system-nspr
+ac_add_options --with-system-nss
+ac_add_options --with-system-icu
+ac_add_options --prefix=/usr
+ac_add_options --enable-application=browser
+ac_add_options --enable-optimize
+ac_add_options --enable-gio
+ac_add_options --enable-official-branding
+ac_add_options --enable-safe-browsing
+ac_add_options --enable-url-classifier
+ac_add_options --enable-system-cairo
+ac_add_options --enable-system-ffi
+ac_add_options --enable-system-pixman
+ac_add_options --with-pthreads
+ac_add_options --with-system-bz2
+ac_add_options --with-system-jpeg
+ac_add_options --with-system-png
+ac_add_options --with-system-zlib
+
+mk_add_options MOZ_OBJDIR=@TOPSRCDIR@/firefox-build-dir
+EOF
+
 touch mozconfig
 ./mach mercurial-setup
 ./mach configure --prefix=/usr
