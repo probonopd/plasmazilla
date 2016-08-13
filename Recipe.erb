@@ -35,11 +35,12 @@ mk_add_options MOZ_OBJDIR=@TOPSRCDIR@/firefox-build-dir
 mk_add_options MOZ_PKG_BASENAME=firefox
 EOF
 
-touch mozconfig
 ./mach mercurial-setup
 ./mach configure
 ./mach build
 ./mach install
+
+ls -l /usr/lib/firefox/
 ########################################################################
 # Build complete
 # Now creating the AppDir
