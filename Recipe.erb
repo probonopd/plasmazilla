@@ -274,10 +274,11 @@ Exec=@MOZ_APP_NAME@ -private-window
 OnlyShowIn=Unity;
 EOF
 
+ls /usr/lib/firefox
 cp /usr/share/applications/firefox.desktop .
 sed -i -e "s|Exec=.*|Exec=firefox|g" firefox.desktop
 sed -i -e "s|Icon=.*|Icon=icon48.png|g" firefox.desktop
-cp /usr/lib/firefox/browser/chrome/browser/content/branding/icon48.png .
+cp /usr/lib/firefox/browser/chrome/icons/default/default48.png .
 get_desktopintegration firefox
 
 APPDIR=firefox
