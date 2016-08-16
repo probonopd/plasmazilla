@@ -1,3 +1,11 @@
+#!/bin/bash
+
+# Halt on errors
+set -e
+
+# Be verbose
+set -x
+
 ARCH=$(arch)
 APP=<%= name %>
 VERSION=0.6.4~git20150428+14
@@ -9,11 +17,92 @@ sudo apt-get -y install software-properties-common shared-mime-info python-xdg  
 mercurial unzip zip autoconf2.13 libgtk-3-dev libgtk2.0-dev libgconf2-dev libdbus-glib-1-dev yasm \
 libasound2-dev libpulse-dev libxt-dev libx11-dev libx11-xcb-dev libxext-dev libxcb-shm0-dev \
 libhunspell-dev libnspr4-dev libevent-dev cmake
-# We are to build from source...
-# sudo add-apt-repository ppa:plasmazilla/releases
-#  sudo apt-get update
-#  sudo apt-get -y install firefox-plasma
 
+#Build Qt5 source
+QTVERSION=5.7.0
+QVERSION_SHORT=5.7
+QTV=5.7.0
+cd /usr/src
+wget http://download.qt.io/archive/qt/${QVERSION_SHORT}/${QTVERSION}/single/qt-everywhere-opensource-src-${QTVERSION}.tar.xz
+tar xvf qt-everywhere-opensource-src-${QTVERSION}.tar.xz
+cd qt-everywhere-opensource-src-$QTV
+./configure -v -release -opensource -confirm-license -no-pkg-config \
+	-no-sql-sqlite -no-gif -qt-libjpeg -no-openssl -no-opengl -no-dbus \
+	-no-qml-debug -no-audio-backend -no-sql-odbc \
+  -no-compile-examples -nomake examples -prefix /usr
+make -j8
+make install
+
+function build_framework
+{ (
+    # errors fatal
+    echo "Compiler version:" $(g++ --version)
+    set -e
+
+    SRC=/kf5
+    BUILD=/kf5/build
+    PREFIX=/usr/
+
+    # framework
+    FRAMEWORK=$1
+
+    # branch, optional parameter
+    BRANCH=""
+    if [[ $2 == "branch" ]];
+    then
+        BRANCH=$3
+    fi
+
+    # clone if not there
+    mkdir -p $SRC
+    cd $SRC
+    if ( test -d $FRAMEWORK )
+    then
+        echo "$FRAMEWORK already cloned"
+        cd $FRAMEWORK
+        git reset --hard
+        git pull --rebase
+        cd ..
+    else
+        git clone git://anongit.kde.org/$FRAMEWORK
+    fi
+
+    if( test -n $BRANCH )
+    then
+        cd $FRAMEWORK
+        git checkout $BRANCH
+        cd ..
+    fi
+
+    # create build dir
+    mkdir -p $BUILD/$FRAMEWORK
+
+    # go there
+    cd $BUILD/$FRAMEWORK
+
+    # cmake it
+    if [[ $2 == "branch" ]];
+    then
+        cmake $SRC/$FRAMEWORK -DCMAKE_INSTALL_PREFIX:PATH=$PREFIX $4 $5 $6 $7 $8 $9
+    else
+        cmake $SRC/$FRAMEWORK -DCMAKE_INSTALL_PREFIX:PATH=$PREFIX $2 $3 $4 $5 $6 $7
+    fi
+
+    # make
+    make VERBOSE=1 -j8
+
+    # install
+    make install
+) }
+
+for FRAMEWORK in <%= frameworks %>; do
+  build_framework $FRAMEWORK
+done
+
+# Builld the kmozillahelper package from source.
+git clone https://github.com/openSUSE/kmozillahelper
+cd kmozillahelper
+cmake cmake -DCMAKE_INSTALL_PREFIX:PATH=/usr . && make all install
 
 #Build Firefox
 export SHELL=/bin/bash
@@ -42,10 +131,6 @@ EOF
 
 mv /usr/lib/firefox-51.0a1 /usr/lib/firefox
 
-# Builld the kmozillahelper package from source.
-git clone https://github.com/openSUSE/kmozillahelper
-cd kmozillahelper
-cmake cmake -DCMAKE_INSTALL_PREFIX:PATH=/usr . && make all install
 ########################################################################
 # Build complete
 # Now creating the AppDir
@@ -282,7 +367,7 @@ EOF
 ls /usr/lib/firefox
 cp /usr/share/applications/firefox.desktop .
 sed -i -e "s|Exec=.*|Exec=firefox|g" firefox.desktop
-sed -i -e "s|Icon=.*|Icon=icon48.png|g" firefox.desktop
+sed -i -e "s|Icon=.*|Icon=default48.png|g" firefox.desktop
 cp /usr/lib/firefox/browser/chrome/icons/default/default48.png .
 get_desktopintegration firefox
 
