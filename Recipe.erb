@@ -36,7 +36,7 @@ wget http://download.qt.io/archive/qt/${QVERSION_SHORT}/${QTVERSION}/single/qt-e
 tar xvf qt-everywhere-opensource-src-${QTVERSION}.tar.xz
 cd qt-everywhere-opensource-src-$QTV
 ./configure -v -release -opensource -confirm-license -no-pkg-config \
-	-no-sql-sqlite -no-gif -qt-libjpeg -no-openssl -no-opengl -no-dbus \
+	-no-sql-sqlite -no-gif -qt-libjpeg -no-openssl  \
 	-no-qml-debug -no-audio-backend -no-sql-odbc -qt-xcb \
   -no-compile-examples -nomake examples -prefix /usr
 make -j8
