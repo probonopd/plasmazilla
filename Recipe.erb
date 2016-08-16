@@ -41,6 +41,11 @@ EOF
 ./mach install
 
 mv /usr/lib/firefox-51.0a1 /usr/lib/firefox
+
+# Builld the kmozillahelper package from source.
+git clone https://github.com/openSUSE/kmozillahelper
+cd kmozillahelper
+cmake cmake -DCMAKE_INSTALL_PREFIX:PATH=/usr . && make all install
 ########################################################################
 # Build complete
 # Now creating the AppDir
