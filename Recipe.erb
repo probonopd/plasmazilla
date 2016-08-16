@@ -18,7 +18,11 @@ mercurial unzip zip autoconf2.13 libgtk-3-dev libgtk2.0-dev libgconf2-dev libdbu
 libasound2-dev libpulse-dev libxt-dev libx11-dev libx11-xcb-dev libxext-dev libxcb-shm0-dev \
 libhunspell-dev libnspr4-dev libevent-dev cmake libsqlite3-dev libopenvg1-mesa-dev libdouble-conversion-dev \
 libdbus-1-dev libts-dev libfontconfig1-dev libfreetype6-dev libx11-dev libxext-dev libxfixes-dev libxi-dev \
-libxrender-dev libxcb1-dev libx11-xcb-dev libxcb-glx0-dev libglib2.0-dev libdrm-dev
+libxrender-dev libxcb1-dev libx11-xcb-dev libxcb-glx0-dev libglib2.0-dev libdrm-dev libx11-xcb1 \
+libx11-xcb-dev libxcb-keysyms1-dev libxcb-image0 libxcb-image0-dev libxcb-icccm4 \
+libxcb-icccm4-dev libxcb-sync0 libxcb-sync0-dev libxcb-xfixes0-dev libxrender-dev libxcb-shape0-dev libxcb-randr0-dev \
+libxcb-render-util0-dev libxcb-glx0-dev libdbus-1-dev libsystemd-daemon-dev \
+liblivemedia-dev libdc-dev libraw-dev libavc1394-dev libx11-xcb-dev libxcb-image0-dev gzip libopenvg1-mesa-dev \
 
 sudo apt-get -y build-dep qtbase5-dev
 
@@ -28,6 +32,7 @@ sudo apt-get update
 sudo apt-get -y install libinput-dev
 
 #Build Qt5 source
+export CXXFLAGS="-I/usr/include/libdrm"
 QTVERSION=5.7.0
 QVERSION_SHORT=5.7
 QTV=5.7.0
