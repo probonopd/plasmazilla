@@ -36,6 +36,7 @@ class Recipe
     attr_accessor :version
     attr_accessor :summary
     attr_accessor :description
+    attr_accessor :cmake
     attr_accessor :frameworks
     attr_accessor :external
     attr_accessor :apps
@@ -48,6 +49,7 @@ end
 appimage = Recipe.new
 appimage.name = "firefox"
 appimage.proper_name = appimage.name.capitalize
+appimage.cmake = true
 appimage.frameworks = 'attica karchive kcoreaddons kauth kcodecs kconfig ki18n kdoctools kguiaddons kwidgetsaddons kconfigwidgets kwindowsystem kcrash kcompletion kitemviews kiconthemes kdbusaddons kservice kjobwidgets solid sonnet ktextwidgets kglobalaccel kxmlgui kbookmarks kio knotifications knewstuff'
 appimage.apps = [Recipe::App.new("#{appimage.name}")]
 File.write('Recipe', appimage.render)
