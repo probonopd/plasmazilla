@@ -108,7 +108,7 @@ function build_framework
     # install
     make install
 ) }
-
+build_framework phonon -DPHONON_BUILD_PHONON4QT5=ON
 for FRAMEWORK in <%= frameworks %>; do
   build_framework $FRAMEWORK
 done
