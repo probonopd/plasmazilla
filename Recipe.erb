@@ -38,7 +38,6 @@ function build_cmake
     set -e
 
     SRC=/cmake
-    PREFIX=/app/usr/
 
     # framework
     CMAKE=$1
@@ -60,7 +59,7 @@ function build_cmake
 
     cd CMake
 
-    ./bootstrap
+    ./bootstrap --prefix=/usr
 
     # make
     make -j8
