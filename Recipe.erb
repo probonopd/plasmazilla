@@ -18,7 +18,7 @@ mercurial unzip zip autoconf2.13 libgtk-3-dev libgtk2.0-dev libgconf2-dev libdbu
 libasound2-dev libpulse-dev libxt-dev libx11-dev libx11-xcb-dev libxext-dev libxcb-shm0-dev \
 libhunspell-dev libnspr4-dev libevent-dev cmake libsqlite3-dev libopenvg1-mesa-dev libdouble-conversion-dev \
 libdbus-1-dev libts-dev libfontconfig1-dev libfreetype6-dev perl-modules libstring-escape-perl perl \
-docbook-xml docbook-xsl libxslt1-dev flex bison
+docbook-xml docbook-xsl libxslt1-dev flex bison libssl-dev
 
 cpan URI::Escape
 
@@ -41,7 +41,7 @@ wget http://download.qt.io/archive/qt/${QVERSION_SHORT}/${QTVERSION}/single/qt-e
 tar xvf qt-everywhere-opensource-src-${QTVERSION}.tar.xz
 cd qt-everywhere-opensource-src-$QTV
 ./configure -v -release -opensource -confirm-license -no-pkg-config \
-	-no-sql-sqlite -no-gif -qt-libjpeg -no-openssl  \
+	-no-sql-sqlite -no-gif -qt-libjpeg  \
 	-no-qml-debug -no-audio-backend -no-sql-odbc -qt-xcb \
   -no-compile-examples -nomake examples -prefix /usr
 make -j8
