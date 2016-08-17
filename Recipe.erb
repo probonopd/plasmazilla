@@ -31,6 +31,49 @@ sudo add-apt-repository -y  ppa:jonathonf/backport-builddeps
 sudo apt-get update
 sudo apt-get -y install libinput-dev
 
+function build_cmake
+{ (
+     # errors fatal
+    echo "Compiler version:" $(g++ --version)
+    set -e
+
+    SRC=/cmake
+    PREFIX=/app/usr/
+
+    # framework
+    CMAKE=$1
+
+    # clone if not there
+    mkdir -p $SRC
+    cd $SRC
+    if ( test -d $CMAKE )
+    then
+        echo "$CMAKE already cloned"
+        cd $CMAKE
+        git reset --hard
+        git pull --rebase
+        cd ..
+    else
+        git clone https://github.com/Kitware/CMake
+    fi
+
+
+    cd CMake
+
+    ./bootstrap
+
+    # make
+    make -j8
+
+    # install
+    make install
+
+) }
+#if ( <%= cmake %> == true )
+#then
+build_cmake cmake
+#fi
+
 #Build Qt5 source
 export CXXFLAGS="-I/usr/include/libdrm"
 QTVERSION=5.7.0
