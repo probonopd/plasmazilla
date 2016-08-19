@@ -449,6 +449,7 @@ copy_deps # Three runs to ensure we catch indirect ones
 delete_blacklisted
 mkdir -p ./usr/bin
 mv /usr/bin/firefox* ./usr/bin/
+( cd ./usr/bin/ ; ln -sf ../lib/firefox/firefox . )
 mkdir -p ./usr/lib; mv /usr/lib/firefox $_
 #mv /usr/lib/mozilla ./usr/lib/
 mv /usr/lib/x86_64-linux-gnu/libstartup-notification-1.so* ./usr/lib/
